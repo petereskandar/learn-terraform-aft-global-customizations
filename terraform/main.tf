@@ -43,7 +43,7 @@ resource "aws_security_group" "allow_tls_eu-west-3" {
   provider    = aws.eu-west-3
   name        = "ATF-Default-SG"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_default_vpc.default.id
+  vpc_id      = aws_default_vpc.default_eu-west-3.id
 
   ingress {
     description      = "TLS from VPC"
