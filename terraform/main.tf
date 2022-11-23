@@ -32,14 +32,14 @@ resource "aws_security_group" "allow_tls" {
 
 ## Multi-Region
 
-resource "aws_default_vpc" "default" {
+resource "aws_default_vpc" "default_eu-west-3" {
   provider = aws.eu-west-3  
   tags = {
     Name = "Default VPC - Control Tower"
   }
 }
 
-resource "aws_security_group" "allow_tls" {
+resource "aws_security_group" "allow_tls_eu-west-3" {
   provider    = aws.eu-west-3
   name        = "ATF-Default-SG"
   description = "Allow TLS inbound traffic"
