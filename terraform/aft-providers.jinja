@@ -25,6 +25,9 @@ provider "aws" {
       managed_by                  = "AFT"
     }
   }
+  endpoints {
+    sts = "sts.eu-south-1.amazonaws.com"
+  }
   skip_metadata_api_check     = false
   skip_region_validation      = false
   skip_credentials_validation = false
