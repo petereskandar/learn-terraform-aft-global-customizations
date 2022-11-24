@@ -4,17 +4,17 @@ resource "aws_default_vpc" "default" {
   }
 }
 
-resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
+resource "aws_security_group" "default-sg" {
+  name        = "DEFAULT-SG-ATF"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["10.0.0.0/8"]
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/8"]
   }
 
   egress {
@@ -33,24 +33,25 @@ resource "aws_security_group" "allow_tls" {
 ## Multi-Region
 
 resource "aws_default_vpc" "default_eu-west-3" {
-  provider = aws.eu-west-3  
+  provider = aws.eu-west-3
   tags = {
     Name = "Default VPC - Control Tower"
   }
 }
 
-resource "aws_security_group" "allow_tls_eu-west-3" {
+resource "aws_security_group" "default-sg-eu-west-3" {
   provider    = aws.eu-west-3
-  name        = "ATF-Default-SG"
+  name        = "DEFAULT-SG-ATF"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.default_eu-west-3.id
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["10.0.0.0/8"]
+    description       = "Allow Inner Traffic"
+    from_port         = 0
+    to_port           = 0
+    protocol          = "-1"
+    self              = true
+    security_group_id = aws_security_group.default-sg-eu-west-3.id
   }
 
   egress {
