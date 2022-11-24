@@ -26,7 +26,7 @@ resource "aws_security_group" "default-sg" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "DEFAULT-SG-ATF"
   }
 }
 
@@ -62,6 +62,6 @@ resource "aws_security_group" "default-sg-eu-west-3" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "DEFAULT-SG-ATF"
   }
 }
