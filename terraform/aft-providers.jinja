@@ -13,9 +13,10 @@ provider "aws" {
   }
 }
 
+# Modify account setting - STS Global Endpoint
 provider "aws" {
-  region = "eu-west-3"
-  alias  = "eu-west-3"
+  region = "eu-south-1"
+  alias  = "eu-south-1"
   assume_role {
     role_arn    = "{{ target_admin_role_arn }}"
   }
@@ -24,5 +25,7 @@ provider "aws" {
       managed_by                  = "AFT"
     }
   }
-  skip_region_validation = true
+  skip_metadata_api_check     = false
+  skip_region_validation      = false
+  skip_credentials_validation = false
 }
