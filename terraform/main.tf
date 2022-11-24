@@ -33,14 +33,14 @@ resource "aws_security_group" "default-sg" {
 ## Multi-Region
 
 resource "aws_default_vpc" "default_eu-west-3" {
-  provider = aws.eu-south-1
+  provider = aws.eu-west-3
   tags = {
     Name = "Default VPC - Control Tower"
   }
 }
 
 resource "aws_security_group" "default-sg-eu-west-3" {
-  provider    = aws.eu-south-1
+  provider    = aws.eu-west-3
   name        = "DEFAULT-SG-ATF"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.default_eu-west-3.id
